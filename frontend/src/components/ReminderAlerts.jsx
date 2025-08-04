@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useToast } from '../context/ToastContext';
 import { Trash2, CheckCircle } from 'lucide-react';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const ReminderAlerts = () => {
   const [reminders, setReminders] = useState([]);
   const [title, setTitle] = useState('');
@@ -12,7 +14,7 @@ const ReminderAlerts = () => {
 
   const fetchReminders = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/reminders');
+      const response = await axios.get('${API_URL}/api/reminders');
       setReminders(response.data);
     } catch (err) {
       console.error('Failed to fetch reminders:', err);
@@ -34,7 +36,7 @@ const ReminderAlerts = () => {
     }
 
     try {
-      const res = await axios.post('http://localhost:5000/api/reminders', {
+      const res = await axios.post('${API_URL}/api/reminders', {
         title,
         dueDate,
       });
@@ -50,7 +52,7 @@ const ReminderAlerts = () => {
 
   const handleDeleteReminder = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/reminders/${id}`);
+      await axios.delete(`${API_URL}/api/reminders/${id}`);
       setReminders(reminders.filter(reminder => reminder._id !== id));
       showToast('Reminder deleted successfully!', 'success');
     } catch (err) {
@@ -62,7 +64,7 @@ const ReminderAlerts = () => {
   const handleToggleComplete = async (reminder) => {
     try {
       const updatedReminder = { ...reminder, isCompleted: !reminder.isCompleted };
-      const res = await axios.put(`http://localhost:5000/api/reminders/${reminder._id}`, updatedReminder);
+      const res = await axios.put(`${API_URL}/api/reminders/${reminder._id}`, updatedReminder);
       setReminders(reminders.map(r => (r._id === res.data._id ? res.data : r)));
       showToast(`Reminder "${reminder.title}" marked as ${res.data.isCompleted ? 'completed' : 'pending'}.`, 'success');
     } catch (err) {

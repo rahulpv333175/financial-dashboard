@@ -3,13 +3,15 @@ import axios from "axios";
 import { useToast } from "../context/ToastContext";
 import PageHeader from "../components/PageHeader"; // ✅ Import new component
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const Expenses = () => {
   const [expenses, setExpenses] = useState([]);
   const { showToast } = useToast();
 
   const fetchExpenses = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/expenses");
+      const response = await axios.get('${API_URL}/api/expenses');
       setExpenses(response.data);
     } catch (error) {
       console.error("Error fetching expenses:", error);
@@ -23,7 +25,7 @@ const Expenses = () => {
 
   const deleteExpense = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/expenses/${id}`);
+      await axios.delete(`${API_URL}/api/expenses/${id}`);
       setExpenses(expenses.filter((expense) => expense._id !== id));
       showToast("Expense deleted successfully!", "success");
     } catch (error) {
@@ -34,7 +36,7 @@ const Expenses = () => {
 
   const handleExportCsv = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/expenses/export-csv", {
+      const response = await axios.get('${API_URL}/api/expenses/export-csv', {
         responseType: 'blob',
       });
       const url = window.URL.createObjectURL(new Blob([response.data]));

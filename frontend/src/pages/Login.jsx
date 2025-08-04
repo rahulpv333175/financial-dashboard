@@ -3,6 +3,8 @@ import { useNavigate, Link } from 'react-router-dom'
 import axios from 'axios'
 import { useToast } from '../context/ToastContext' // ✅ Import useToast
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function Login({ setIsLoggedIn }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -12,7 +14,7 @@ function Login({ setIsLoggedIn }) {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', {
+      const res = await axios.post('${API_URL}/api/auth/login', {
         email,
         password,
       })

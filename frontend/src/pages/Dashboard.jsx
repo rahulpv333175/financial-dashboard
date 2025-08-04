@@ -22,6 +22,8 @@ import {
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, ArcElement, Tooltip, Legend)
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const Dashboard = () => {
   const [expenses, setExpenses] = useState([])
   const [editingExpense, setEditingExpense] = useState(null)

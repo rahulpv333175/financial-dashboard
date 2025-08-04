@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useToast } from '../context/ToastContext';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function ExpenseForm({ onAdd, onUpdate, editingExpense, onCancelEdit }) {
   const [title, setTitle] = useState('');
   const [amount, setAmount] = useState('');
@@ -32,7 +34,7 @@ function ExpenseForm({ onAdd, onUpdate, editingExpense, onCancelEdit }) {
       let res;
       if (editingExpense) {
         // Handle update
-        res = await axios.put(`http://localhost:5000/api/expenses/${editingExpense._id}`, expenseData);
+        res = await axios.put(`${API_URL}/api/expenses/${editingExpense._id}`, expenseData);
         if (res.status === 200) {
           showToast('Expense updated successfully!', 'success');
           onUpdate(res.data);

@@ -3,6 +3,8 @@ import axios from "axios";
 import { useToast } from '../context/ToastContext';
 import { Trash2 } from "lucide-react";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const BudgetManager = ({ expenses }) => {
   const [budgets, setBudgets] = useState([]); // ✅ Now an array of objects
   const [category, setCategory] = useState("");
@@ -11,7 +13,7 @@ const BudgetManager = ({ expenses }) => {
 
   const fetchBudgets = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/budgets");
+      const response = await axios.get('${API_URL}/api/budgets');
       setBudgets(response.data);
     } catch (err) {
       console.error("Failed to fetch budgets:", err);
@@ -35,7 +37,7 @@ const BudgetManager = ({ expenses }) => {
     try {
       if (existingBudget) {
         // Update existing budget
-        const res = await axios.put(`http://localhost:5000/api/budgets/${existingBudget._id}`, {
+        const res = await axios.put(`${API_URL}/api/budgets/${existingBudget._id}`, {
           category,
           amount: parseFloat(amount),
         });
@@ -43,7 +45,7 @@ const BudgetManager = ({ expenses }) => {
         showToast("Budget updated successfully!", "success");
       } else {
         // Create new budget
-        const res = await axios.post("http://localhost:5000/api/budgets", {
+        const res = await axios.post('${API_URL}/api/budgets', {
           category,
           amount: parseFloat(amount),
         });
@@ -60,7 +62,7 @@ const BudgetManager = ({ expenses }) => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/budgets/${id}`);
+      await axios.delete(`${API_URL}/api/budgets/${id}`);
       setBudgets(budgets.filter(b => b._id !== id));
       showToast("Budget deleted successfully!", "success");
     } catch (err) {

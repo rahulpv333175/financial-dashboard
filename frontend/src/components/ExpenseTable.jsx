@@ -9,7 +9,7 @@ const ExpenseTable = ({ expenses, setExpenses, onEdit }) => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/expenses/${id}`);
+      await axios.delete(`${API_URL}/api/expenses/${id}`);
       setExpenses((prev) => prev.filter((item) => item._id !== id));
       showToast("Expense deleted successfully!", "success");
     } catch (err) {

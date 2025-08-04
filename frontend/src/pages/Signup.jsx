@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useToast } from '../context/ToastContext' // ✅ Import useToast
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function Signup() {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
@@ -14,7 +16,7 @@ function Signup() {
     e.preventDefault()
 
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/signup', {
+      const res = await axios.post('${API_URL}/api/auth/signup', {
         username,
         email,
         password,

@@ -1,0 +1,2 @@
+mongodb+srv://rahulpv333175:<rahulrohit333175>@cluster0.ox2ccjl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+financial-dashboard-rahul

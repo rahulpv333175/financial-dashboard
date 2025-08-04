@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useToast } from '../context/ToastContext';
 import { Trash2 } from 'lucide-react';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const SavingGoalTracker = () => {
   const [goals, setGoals] = useState([]);
   const [title, setTitle] = useState('');
@@ -12,7 +14,7 @@ const SavingGoalTracker = () => {
 
   const fetchGoals = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/saving-goals');
+      const response = await axios.get('${API_URL}/api/saving-goals');
       setGoals(response.data);
     } catch (err) {
       console.error('Failed to fetch goals:', err);
@@ -34,7 +36,7 @@ const SavingGoalTracker = () => {
     }
 
     try {
-      const res = await axios.post('http://localhost:5000/api/saving-goals', {
+      const res = await axios.post('${API_URL}/api/saving-goals', {
         title,
         targetAmount: parseFloat(targetAmount),
       });
@@ -50,7 +52,7 @@ const SavingGoalTracker = () => {
 
   const handleDeleteGoal = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/saving-goals/${id}`);
+      await axios.delete(`${API_URL}/api/saving-goals/${id}`);
       setGoals(goals.filter(goal => goal._id !== id));
       showToast('Goal deleted successfully!', 'success');
     } catch (err) {
@@ -71,7 +73,7 @@ const SavingGoalTracker = () => {
     };
 
     try {
-      const res = await axios.put(`http://localhost:5000/api/saving-goals/${goal._id}`, updatedGoal);
+      const res = await axios.put(`${API_URL}/api/saving-goals/${goal._id}`, updatedGoal);
       setGoals(goals.map(g => (g._id === res.data._id ? res.data : g)));
       showToast('Goal progress updated!', 'success');
     } catch (err) {
