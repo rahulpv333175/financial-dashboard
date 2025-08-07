@@ -5,8 +5,7 @@ backend/node_modules/
 # Build output directories
 frontend/dist/
 
-# Environment variables
-.env
+
 
 # Misc
 .DS_Store
