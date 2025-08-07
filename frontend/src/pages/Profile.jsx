@@ -12,7 +12,7 @@ const Profile = () => {
 
   const fetchUserProfile = async () => {
     try {
-      const response = await axios.get('${API_URL}/api/auth/profile');
+      const response = await axios.get(`${API_URL}/api/auth/profile`);
       setUser(response.data);
       setEditFormData({ username: response.data.username, email: response.data.email });
     } catch (error) {
@@ -31,7 +31,7 @@ const Profile = () => {
     e.preventDefault();
     try {
       const response = await axios.put(
-        '${API_URL}/api/auth/profile',
+        `${API_URL}/api/auth/profile`,
         editFormData
       );
       setUser(response.data);

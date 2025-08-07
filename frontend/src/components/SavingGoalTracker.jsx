@@ -14,7 +14,7 @@ const SavingGoalTracker = () => {
 
   const fetchGoals = async () => {
     try {
-      const response = await axios.get('${API_URL}/api/saving-goals');
+      const response = await axios.get(`${API_URL}/api/saving-goals`);
       setGoals(response.data);
     } catch (err) {
       console.error('Failed to fetch goals:', err);
@@ -36,7 +36,7 @@ const SavingGoalTracker = () => {
     }
 
     try {
-      const res = await axios.post('${API_URL}/api/saving-goals', {
+      const res = await axios.post(`${API_URL}/api/saving-goals`, {
         title,
         targetAmount: parseFloat(targetAmount),
       });

@@ -11,7 +11,7 @@ const Expenses = () => {
 
   const fetchExpenses = async () => {
     try {
-      const response = await axios.get('${API_URL}/api/expenses');
+      const response = await axios.get(`${API_URL}/api/expenses`);
       setExpenses(response.data);
     } catch (error) {
       console.error("Error fetching expenses:", error);
@@ -36,7 +36,7 @@ const Expenses = () => {
 
   const handleExportCsv = async () => {
     try {
-      const response = await axios.get('${API_URL}/api/expenses/export-csv', {
+      const response = await axios.get(`${API_URL}/api/expenses/export-csv`, {
         responseType: 'blob',
       });
       const url = window.URL.createObjectURL(new Blob([response.data]));

@@ -13,7 +13,7 @@ const BudgetManager = ({ expenses }) => {
 
   const fetchBudgets = async () => {
     try {
-      const response = await axios.get('${API_URL}/api/budgets');
+      const response = await axios.get(`${API_URL}/api/budgets`);
       setBudgets(response.data);
     } catch (err) {
       console.error("Failed to fetch budgets:", err);
@@ -45,7 +45,7 @@ const BudgetManager = ({ expenses }) => {
         showToast("Budget updated successfully!", "success");
       } else {
         // Create new budget
-        const res = await axios.post('${API_URL}/api/budgets', {
+        const res = await axios.post(`${API_URL}/api/budgets`, {
           category,
           amount: parseFloat(amount),
         });

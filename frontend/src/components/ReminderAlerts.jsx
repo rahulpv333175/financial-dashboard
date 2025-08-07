@@ -14,7 +14,7 @@ const ReminderAlerts = () => {
 
   const fetchReminders = async () => {
     try {
-      const response = await axios.get('${API_URL}/api/reminders');
+      const response = await axios.get(`${API_URL}/api/reminders`);
       setReminders(response.data);
     } catch (err) {
       console.error('Failed to fetch reminders:', err);
@@ -36,7 +36,7 @@ const ReminderAlerts = () => {
     }
 
     try {
-      const res = await axios.post('${API_URL}/api/reminders', {
+      const res = await axios.post(`${API_URL}/api/reminders`, {
         title,
         dueDate,
       });

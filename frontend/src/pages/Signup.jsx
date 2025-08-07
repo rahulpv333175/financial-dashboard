@@ -16,7 +16,7 @@ function Signup() {
     e.preventDefault()
 
     try {
-      const res = await axios.post('${API_URL}/api/auth/signup', {
+      const res = await axios.post(`${API_URL}/api/auth/signup`, {
         username,
         email,
         password,
