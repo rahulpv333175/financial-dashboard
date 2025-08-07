@@ -43,7 +43,7 @@ function ExpenseForm({ onAdd, onUpdate, editingExpense, onCancelEdit }) {
         }
       } else {
         // Handle add
-        res = await axios.post('http://localhost:5000/api/expenses', expenseData);
+        res = await axios.post('${API_URL}/api/expenses', expenseData);
         if (res.status === 201) {
           showToast('Expense added successfully!', 'success');
           onAdd(res.data);

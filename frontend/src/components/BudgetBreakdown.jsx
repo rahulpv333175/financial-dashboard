@@ -11,7 +11,7 @@ const BudgetBreakdown = ({ expenses }) => {
   useEffect(() => {
     const fetchBudgets = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/budgets");
+        const response = await axios.get('${API_URL}/api/budgets');
         setBudgets(response.data);
       } catch (err) {
         console.error("Failed to fetch budgets:", err);
